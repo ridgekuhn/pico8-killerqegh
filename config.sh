@@ -4,9 +4,9 @@ PICOTOOL='./vendor/picotool/p8tool'
 
 COMPILED="./src/dist.p8";
 LUAINDEX="./src/index.p8";
-GFX="./assets/gfx.p8";
-GFF="./assets/gfx.p8";
-MAP="./assets/gfx.p8";
-SFX="./assets/sounds.p8";
-MUSIC="./assets/sounds.p8";
+GFX="./assets/sprites.p8";
+GFF="./assets/sprites.p8";
+MAP="./assets/sprites.p8";
+SFX="./assets/sound.p8";
+MUSIC="./assets/sound.p8";
 

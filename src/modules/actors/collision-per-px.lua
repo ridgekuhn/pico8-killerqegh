@@ -126,7 +126,6 @@ function actors:get_frame(frames, clock)
   local bitmask = {}
 
   frames.hitboxes = frames.hitboxes or {}
-	frames.bitmasks = frames.bitmasks or {}
 
   if(self.xdir == 1) then
     bitmask = frames.bitmasks

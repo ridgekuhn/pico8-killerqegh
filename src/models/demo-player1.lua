@@ -1,9 +1,10 @@
+--t
 ---player 1 model
 
 --describe default player properties
 p.defaulthitbox = {w=6,h=16,ox=5,oy=0}
 
-p.states= {
+p.states = {
 	idle = {
 		frames = {
 			lpf = 1,
@@ -64,6 +65,30 @@ p.states= {
 			}
 		}
 	},
+	drinking = {
+		frames = {
+			lpf = 5,
+			sprites = {
+				{sx=32,sy=32,sw=16,sh=16},
+				{sx=48,sy=32,sw=16,sh=16}
+			},
+			hitboxes = {
+				p.defaulthitbox,
+				p.defaulthitbox
+			}
+		}
+	},
+	berserker = {
+		frames = {
+			lpf = 1,
+			sprites = {
+				{sx=64,sy=32,sw=16,sh=16}
+			},
+			hitboxes = {
+				p.defaulthitbox
+			}
+		}
+	},
 	dead = {
 		frames = {
 			lpf = 1,
@@ -79,44 +104,37 @@ p.states= {
 
 p.states.falling = p.states.jumping
 
-p.dialogue = {
-	[1] = 'yawn...',
-	[2] = 'so bored...',
-	[3] = 'hello???',
-	[4] = "@!#*",
-	[5] = "*#&*!!",
-	[6] = "&!#*@!!!"
-}
+--instantiate player 1
 
 ---initialize player
 function p:init()
-	for i=1, cfg.players, 1 do
-		add(self, self:new({
-			x = flr(rnd(112)),
-			speed = 2,
+  p[1] = p:new({
+    x = 0,
+		speed = 2,
+		rise = 8,
 
-			lives = 3,
-			color = ceil(rnd(15)),
+    lives = 3,
+    score = 0,
+    prevscore = 0,
 
-			cors = {},
-			dcors = {}
-		}))
+		state = 'idle',
+		sclock = 0
+  })
 
-		self[i]:spawn()
-	end
+	p[1].sprite, p[1].hitbox = p[1]:get_frame()
+
+  p[1]:spawn()
 end
 
 ---spawn player
 function p:spawn()
-	self.health = 100
+  self.health = 100
 
-	self:set_state('idle', true)
-	self.sprite, self.hitbox, self.bitmask = self:get_frame()
+	--reset dirty collisions
+  self.powerup = nil
+  self.hits = nil
 
-	self.y = 0
-	self.altitude = self:get_altitude()
-
-	--reset dirty hits
-	self.hits = nil
+  self.y = 0
+  self.altitude = self:get_altitude()
 end
 

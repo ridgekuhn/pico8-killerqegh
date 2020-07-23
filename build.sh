@@ -4,18 +4,18 @@
 source './config.sh'
 
 buildcart() {
-	if $PICOTOOL build $COMPILED --lua $LUAINDEX --gfx $GFX --gff $GFF --map $MAP --sfx $SFX --music $MUSIC
-	then
-		echo `date +%H:%M:` "Cart successfully built at $COMPILED"
-	else
-		echo "Couldn't build the cart!"
-	fi
+  if $PICOTOOL build $COMPILED --lua $LUAINDEX --gfx $GFX --gff $GFF --map $MAP --sfx $SFX --music $MUSIC
+  then
+    echo `date +%H:%M:` "Cart successfully built at $COMPILED"
+  else
+    echo "Couldn't build the cart!"
+  fi
 }
 
 if [ `command -v $PICOTOOL` ]
 then
-	buildcart
+  buildcart
 else
-	echo "Couldn't find p8tool!"
+  echo "Couldn't find p8tool!"
 fi
 

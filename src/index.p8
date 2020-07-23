@@ -1,12 +1,9 @@
 pico-8 cartridge // http://www.pico-8.com
 version 29
 __lua__
---pico-8 platformer engine
+--star trek: killer q'egh
 --by ridgek
 --https://ridgek.itch.io
---
---released under a
---gpl v3 license
 
 -->8
 ---engine models
@@ -42,20 +39,27 @@ __lua__
 
 -->8
 ---demo models
-#include ./models/demo-players.lua
+#include ./models/demo-levels.lua
+#include ./models/demo-player1.lua
+#include ./models/demo-enemies.lua
+#include ./models/demo-points.lua
+#include ./models/demo-powerups.lua
 
 -->8
 ---demo controllers
-#include ./controllers/demo-players.lua
+#include ./controllers/demo-levels.lua
+#include ./controllers/demo-player1.lua
+#include ./controllers/demo-enemies.lua
+#include ./controllers/demo-points.lua
+#include ./controllers/demo-powerups.lua
 
 -->8
 ---demo views
 #include ./views/demo-actors.lua
-#include ./views/demo-players.lua
 #include ./views/demo-hud.lua
-
--->8
----demo debug
-#include ./modules/actors/collision-aabb-debug.lua
-
+#include ./views/demo-levels.lua
+#include ./views/demo-player1.lua
+#include ./views/demo-enemies.lua
+#include ./views/demo-points.lua
+#include ./views/demo-powerups.lua
 
