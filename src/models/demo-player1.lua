@@ -2,17 +2,15 @@
 ---player 1 model
 
 --describe default player properties
-p.defaulthitbox = {w=6,h=16,ox=5,oy=0}
-
 p.states = {
 	idle = {
 		frames = {
 			lpf = 1,
 			sprites = {
-				{sx=0,sy=0,sw=16,sh=16}
+				'0,0,16,16,0,0,0,0'
 			},
 			hitboxes = {
-				p.defaulthitbox
+				'16,6,5,0'
 			}
 		}
 	},
@@ -20,10 +18,10 @@ p.states = {
 		frames = {
 			lpf = 1,
 			sprites = {
-				{sx=64,sy=0,sw=16,sh=16}
+				'64,0,16,16,0,0,0,0'
 			},
 			hitboxes = {
-				p.defaulthitbox
+				'16,6,5,0'
 			}
 		}
 	},
@@ -32,14 +30,14 @@ p.states = {
 			lpf = 5,
 			rev = true,
 			sprites = {
-				{sx=16,sy=0,sw=16,sh=16},
-				{sx=32,sy=0,sw=16,sh=16},
-				{sx=48,sy=0,sw=16,sh=16}
+				'16,0,16,16,0,0,0,0',
+				'32,0,16,16,0,0,0,0',
+				'48,0,16,16,0,0,0,0'
 			},
 			hitboxes = {
-				p.defaulthitbox,
-				p.defaulthitbox,
-				p.defaulthitbox
+				'16,6,5,0',
+				'16,6,5,0',
+				'16,6,5,0'
 			}
 		}
 	},
@@ -47,10 +45,10 @@ p.states = {
 		frames = {
 			lpf = 1,
 			sprites = {
-				{sx=112,sy=0,sw=16,sh=16}
+				'112,0,16,16,0,0,0,0'
 			},
 			hitboxes = {
-				{w=14,h=14,ox=1,oy=2}
+				'15,15,1,2'
 			}
 		}
 	},
@@ -58,10 +56,10 @@ p.states = {
 		frames = {
 			lpf = 1,
 			sprites = {
-				{sx=80,sy=0,sw=16,sh=16}
+				'80,0,16,16,0,0,0,0'
 			},
 			hitboxes = {
-				p.defaulthitbox
+				'16,6,5,0'
 			}
 		}
 	},
@@ -69,12 +67,12 @@ p.states = {
 		frames = {
 			lpf = 5,
 			sprites = {
-				{sx=32,sy=32,sw=16,sh=16},
-				{sx=48,sy=32,sw=16,sh=16}
+				'32,32,16,16,0,0,0,0',
+				'48,32,16,16,0,0,0,0'
 			},
 			hitboxes = {
-				p.defaulthitbox,
-				p.defaulthitbox
+				'16,6,5,0',
+				'16,6,5,0'
 			}
 		}
 	},
@@ -82,10 +80,10 @@ p.states = {
 		frames = {
 			lpf = 1,
 			sprites = {
-				{sx=64,sy=32,sw=16,sh=16}
+				'64,32,16,16,0,0,0,0'
 			},
 			hitboxes = {
-				p.defaulthitbox
+				'16,6,5,0'
 			}
 		}
 	},
@@ -93,14 +91,16 @@ p.states = {
 		frames = {
 			lpf = 1,
 			sprites = {
-				{sx=96,sy=0,sw=16,sh=16}
+				'96,0,16,16,0,0,0,0'
 			},
 			hitboxes = {
-				{w=16,h=5,ox=0,oy=9}
+				'5,16,0,9'
 			}
 		}
 	}
 }
+
+p:deserialize_frames()
 
 p.states.falling = p.states.jumping
 

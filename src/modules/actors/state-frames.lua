@@ -1,92 +1,9 @@
 ---actor state frames
---
---provides a method to
---"animate" an actor's
---sprite, hitbox, and bitmask
---properties using the
---state and sclock properties
---
---requirements:
---	none
---
---extends:
---	none
---
---conflicts:
---	none
-
---******
---models
---******
----states table
---add this table template
---while/after instantiating
---a child class of actors,
---and before defining
---the child's :new() method.
---
---some_new_actors = actors:new({
---	some_property = some_value,
---
---	states = {
---		some_state =	{
---			frames = {
---				lpf = 1,
---				sprites = {
---					{
---						sx = 0,
---						sy = 0,
---						sw = 8,
---						sh = 8,
---						dw = 8, --optional
---						dh = 8, --optional
---						flip_x = false, --optional
---						flip_y = false, --optional
---					},
---					hitboxes = {
---						{
---							w = 8,
---							h = 8,
---							ox = 0,
---							oy = 0,
---						}
---					}
---				}
---			}
---		},
---		etc.
---	}
---})
 
 --*****
 --views
 --*****
 ---frame animation
---
---set the actor sprite and
---corresponding hitbox by
---loading data from
---the actor's .states table
---
---can be overridden to load
---any arbitrary table of
---sprite metadata against
---any arbitrary clock
---
---@usage
---  self.sprite, self.hitbox = self:set_sprite()
---
---@param sprites table optional
---  set of sprite data
---
---@param clock num optional
---  clock to animate against
---
---@return table
---  of sprite metadata
---
---@return table
---  of hitbox metadata
 function actors:get_frame(frames, clock)
   local frames = frames or self.states[self.state].frames
   local clock = clock or self.sclock
@@ -146,3 +63,4 @@ function actors:get_frame(frames, clock)
 
   return frames.sprites[f], frames.hitboxes[f]
 end
+

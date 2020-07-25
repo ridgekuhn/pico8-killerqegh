@@ -59,6 +59,8 @@ function game_running_draw()
   ptflags:draw()
   powerups:draw()
 
+	level:draw()
+
   hud_draw()
 end
 

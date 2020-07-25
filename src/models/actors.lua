@@ -24,18 +24,18 @@ end
 
 --actor collision coordinates
 function actors:get_xmin()
-	return self.x + self.hitbox.ox
+	return self.x + self.hitbox[3]
 end
 
 function actors:get_xmax()
-	return self.x + self.hitbox.ox + self.hitbox.w - 1
+	return self.x + self.hitbox[3] + self.hitbox[2] - 1
 end
 
 function actors:get_ymin()
-	return self.y + self.hitbox.oy
+	return self.y + self.hitbox[4]
 end
 
 function actors:get_ymax()
-	return self.y + self.hitbox.oy + self.hitbox.h - 1
+	return self.y + self.hitbox[4] + self.hitbox[1] - 1
 end
 

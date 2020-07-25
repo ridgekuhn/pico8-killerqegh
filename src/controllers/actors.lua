@@ -1,24 +1,36 @@
 ---actors class controller
 
----change actor state
-function actors:set_state(state)
-	self.state = state
-	self.sclock = 0
+---update actor state
+--function actors:update_state()
+--  if(self.state == 'some_state') then
+--    self:some_state()
+--  elseif(self.state == 'some_other_state') then
+--    self:some_other_state()
+--  end
+--end
 
-	self:update_state()
+---set actor state
+function actors:set_state(state, no_update)
+  self.state = state
+  self.sclock = 0
+
+  if(not no_update) then
+    self:update_state()
+  end
 end
 
 ---update coroutines
 function actors:update_cors(cors)
-	for cor in all(cors) do
-		if(costatus(cor) == 'suspended') then
-			coresume(cor)
-		elseif(costatus(cor) == 'dead') then
-			del(cors, cor)
-		end
-	end
+  for cor in all(cors) do
+    if(costatus(cor) == 'suspended') then
+      coresume(cor)
+    elseif(costatus(cor) == 'dead') then
+      del(cors, cor)
+    end
+  end
 end
 
+---solid map tile collision
 function actors:get_coll_solid(axis, d, ndir)
   local d = d or 0
   local ndir = ndir or self[axis..'dir']
@@ -48,59 +60,24 @@ function actors:get_coll_solid(axis, d, ndir)
   end
 end
 
----get altitude
-function actors:get_altitude()
-	for i=1, 127, 8 do
-		local c = self:get_coll_solid('y', i, 1)
+---get move distance
+function actors:get_move(axis, d, in_bounds)
+  local d = d or (self.speed * self[axis..'dir'])
 
-    if(c) then
-      return c - self:get_ymax() - 1
+  for i = d, 0, -sgn(d) do
+    local c = self:get_coll_solid(axis, i)
+
+    if(type(in_bounds) == 'function') then
+      if(not c and
+        in_bounds(self, i)
+      ) then
+        return i
+      end
+    elseif(not c) then
+      return i
     end
   end
 
-	return -1
-end
-
-function actors:get_move(axis, d, in_bounds)
-	local d = d or (self.speed * self[axis..'dir'])
-
-	for i = d, 0, -sgn(d) do
-		local c = self:get_coll_solid(axis, i)
-
-		if(type(in_bounds) == 'function') then
-			if(not c and
-				in_bounds(self, i)
-			) then
-				return i
-			end
-		elseif(not c) then
-			return i
-		end
-	end
-
-	return 0
-end
-
----fall distance
-function actors:get_fall(m)
-	local dy = get_gravity(self.sclock, m)
-
-	if(dy > self.altitude) then
-		return self.altitude
-	end
-
-	return dy
-end
-
----jump distance
-function actors:get_jump(rise, m)
-	local rise = rise or self.rise
-	local decel = get_gravity(self.sclock, m)
-
-	if(decel >= rise) then
-		return 0
-	else
-		return -(rise - get_gravity(self.sclock))
-	end
+  return 0
 end
 

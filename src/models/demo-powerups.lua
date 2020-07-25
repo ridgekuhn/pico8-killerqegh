@@ -1,7 +1,7 @@
 ---powerups base class
 powerups = actors:new({
-	sprite = {sx=0,sy=24,sw=8,sh=8},
-	hitbox = {w=6,h=5,ox=1,oy=2}
+	sprite = {0,24,8,8,0,0,0,0},
+	hitbox = {5,6,1,2}
 })
 
 ---initialize powerups
